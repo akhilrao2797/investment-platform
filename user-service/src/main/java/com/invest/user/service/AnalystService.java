@@ -15,7 +15,7 @@ public class AnalystService implements UserService{
 
     @Override
     public Person getUserById(String userId) {
-        return analystRepository.getById(userId);
+        return analystRepository.getOne(userId);
     }
 
     @Override
