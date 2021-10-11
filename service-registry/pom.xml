@@ -11,7 +11,7 @@
 
     <artifactId>service-registry</artifactId>
     <properties>
-        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <spring-cloud.version>2020.0.3</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
