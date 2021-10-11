@@ -14,7 +14,7 @@ public class TraderService implements UserService {
 
     @Override
     public Person getUserById(String userId) {
-        return traderRepository.getById(userId);
+        return traderRepository.getOne(userId);
     }
 
     @Override
