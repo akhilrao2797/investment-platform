@@ -9,37 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.invest.user.util.UserServiceFactory.getService;
+
 @RestController
 @RequestMapping("/v1")
 public class UserController {
 
-    @Autowired
-    AnalystService analystService;
-    @Autowired
-    TraderService traderService;
-
     @GetMapping("/user('{userId}')")
     public ResponseEntity<Person> getUserInfo(@PathVariable String userId, @RequestParam String type){
-        return ResponseEntity.ok(getService(type).getUserById(userId));
+        Person userById = getService(type).getUserById(userId);
+        return ResponseEntity.ok(userById);
     }
 
     @PostMapping("/user")
     public ResponseEntity<Person> addUser(@RequestBody Person person, @RequestParam String type){
-        return ResponseEntity.ok(getService(type).postUser(person));
+        Person user = getService(type).postUser(person);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/user('{userId}')")
     public ResponseEntity<String> deleteUser(@PathVariable String userId, @RequestParam String type){
         getService(type).deleteUserById(userId);
         return ResponseEntity.accepted().build();
-    }
-
-    public UserService getService(String type){
-        UserService userService = null;
-        switch(type){
-            case "ANALYST" : userService = analystService;break;
-            case "TRADER"  : userService = traderService; break;
-        }
-        return userService;
     }
 }
