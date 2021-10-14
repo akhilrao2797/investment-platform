@@ -10,12 +10,12 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>invest-lib</module>
-        <module>investment-service</module>
+        <module>service-registry</module>
+        <module>cloud-gateway</module>
         <module>auth-service</module>
         <module>user-service</module>
         <module>payment-service</module>
-        <module>service-registry</module>
-        <module>cloud-gateway</module>
+        <module>investment-service</module>
     </modules>
 
     <parent>
