@@ -8,7 +8,7 @@ public class UserNotFoundException extends RuntimeException{
 
     public UserNotFoundException(String message) {
         super(message);
-        this.messageId = ErrorCodeMapper.getValue(message);
+//        this.messageId = ErrorCodeMapper.getValue(message);
     }
 
     public int getMessageId() {
