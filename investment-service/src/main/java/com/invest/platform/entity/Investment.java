@@ -1,4 +1,4 @@
-package com.invest.platform.models;
+package com.invest.platform.entity;
 
 import com.invest.lib.config.NotNullAndNotEmpty;
 
@@ -6,13 +6,13 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public abstract class Investment {
+public class Investment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long investmentId;
-    @OneToOne
-    Analyst analyst;
+    @NotNullAndNotEmpty
+    String analyst;
     @NotNullAndNotEmpty
     String stock;
     @NotNullAndNotEmpty
@@ -35,11 +35,11 @@ public abstract class Investment {
         this.dateOfIssue = LocalDateTime.now();
     }
 
-    public Analyst getAnalyst() {
+    public String getAnalyst() {
         return analyst;
     }
 
-    public void setAnalyst(Analyst analyst) {
+    public void setAnalyst(String analyst) {
         this.analyst = analyst;
     }
 

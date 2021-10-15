@@ -1,23 +1,30 @@
-package com.invest.platform.models;
+package com.invest.platform.model;
 
-import com.invest.lib.config.NotNullAndNotEmpty;
+import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public class Analyst implements Serializable {
 
-@Entity
-public class Analyst {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-
-    @NotNullAndNotEmpty
+    String analystId;
+    String name;
     String company;
     boolean statusActive;
-    @NotNullAndNotEmpty
     String sebiRegisteredId;
+
+    public String getAnalystId() {
+        return analystId;
+    }
+
+    public void setAnalystId(String analystId) {
+        this.analystId = analystId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getCompany() {
         return company;
