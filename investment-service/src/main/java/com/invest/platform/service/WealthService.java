@@ -1,15 +1,15 @@
 package com.invest.platform.service;
 
-import com.invest.platform.models.Analyst;
-import com.invest.platform.models.Investment;
-import com.invest.platform.models.InvestmentType;
-import com.invest.platform.repository.InvestmentRepository;
+import com.invest.platform.entity.Investment;
+import com.invest.platform.entity.InvestmentType;
+import com.invest.platform.model.Analyst;
 import com.invest.platform.utils.InvestmentFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.NoSuchElementException;
@@ -19,21 +19,27 @@ import java.util.Optional;
 public class WealthService {
 
     private InvestmentFactory investmentFactory;
-//    private AnalystService analystService;
+    private RestTemplate restTemplate;
     private Logger LOG;
 
     @Autowired
-    WealthService(InvestmentFactory investmentFactory){
+    WealthService(InvestmentFactory investmentFactory, RestTemplate restTemplate){
         this.investmentFactory = investmentFactory;
-//        this.analystService = analystService;
+        this.restTemplate = restTemplate;
         LOG = LoggerFactory.getLogger(WealthService.class);
     }
 
-    public Investment addInvestmentInfo(Investment investment) {
+    public Investment addInvestmentInfo(Investment investment) throws Exception {
         LOG.debug("Entered InvestmentService.addInvestmentInfo");
-//        Analyst analyst = analystService
-//                .getAnalystById(investment.getAnalyst().getUserId());
-//        investment.setAnalyst(analyst);
+
+        try {
+            String analystURL = "http://USER-SERVICE/user-sub/v1/user('" + investment.getAnalyst() + "')?type=ANALYST";
+            Analyst analyst = restTemplate
+                    .getForObject(analystURL, Analyst.class);
+        } catch(Exception ex){
+            throw new Exception(ex);
+        }
+
         investment = investmentFactory.insertData(investment);
         if(Long.valueOf(investment.getInvestmentId()) == null){
             throw new NoSuchElementException();
@@ -49,7 +55,11 @@ public class WealthService {
         LOG.debug("Exited InvestmentService.deleteInvestmentInfo");
     }
 
-    public Investment updateInvestmentInfo(int id, InvestmentType type, Optional<Float> buyPrice, Optional<Float> sellPrice) {
+    public Investment updateInvestmentInfo(int id,
+                                           InvestmentType type,
+                                           Optional<Float> buyPrice,
+                                           Optional<Float> sellPrice) {
+
         LOG.debug("Entered InvestmentService.updateInvestmentInfo");
         JpaRepository jpaRepository = investmentFactory.getInvestmentRepository(type);
         Investment investment = getInvestmentInfo(id, type);

@@ -1,9 +1,9 @@
 package com.invest.platform.utils;
 
-import com.invest.platform.models.Investment;
-import com.invest.platform.models.InvestmentType;
-import com.invest.platform.models.LongTermInvestment;
-import com.invest.platform.models.ShortTermInvestment;
+import com.invest.platform.entity.Investment;
+import com.invest.platform.entity.InvestmentType;
+import com.invest.platform.entity.LongTermInvestment;
+import com.invest.platform.entity.ShortTermInvestment;
 import com.invest.platform.repository.LtiRepository;
 import com.invest.platform.repository.StiRepository;
 import org.springframework.beans.factory.annotation.Autowired;

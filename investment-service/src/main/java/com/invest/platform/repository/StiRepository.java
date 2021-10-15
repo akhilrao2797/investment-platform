@@ -1,6 +1,6 @@
 package com.invest.platform.repository;
 
-import com.invest.platform.models.ShortTermInvestment;
+import com.invest.platform.entity.ShortTermInvestment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

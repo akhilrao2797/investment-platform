@@ -1,4 +1,4 @@
-package com.invest.platform.models;
+package com.invest.platform.entity;
 
 public enum InvestmentType {
     LONG_TERM_INVESTMENT,

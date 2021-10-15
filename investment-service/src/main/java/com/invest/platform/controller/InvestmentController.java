@@ -1,7 +1,7 @@
 package com.invest.platform.controller;
 
-import com.invest.platform.models.Investment;
-import com.invest.platform.models.InvestmentType;
+import com.invest.platform.entity.Investment;
+import com.invest.platform.entity.InvestmentType;
 import com.invest.platform.service.FileService;
 import com.invest.platform.service.WealthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +28,14 @@ public class InvestmentController {
     @GetMapping("/invest")
     public ResponseEntity<Investment> getInvestment(@RequestParam long id,
                                                     @RequestParam InvestmentType type) {
-        return ResponseEntity.ok(wealthService.getInvestmentInfo(id, type));
+        Investment investmentInfo = wealthService.getInvestmentInfo(id, type);
+        return ResponseEntity.ok(investmentInfo);
     }
 
     @PostMapping("/invest")
-    public ResponseEntity<Investment> addInvestment(@RequestBody Investment investment) {
-        return ResponseEntity.ok(wealthService.addInvestmentInfo(investment));
+    public ResponseEntity<Investment> addInvestment(@RequestBody Investment investment) throws Exception {
+        Investment investmentInfo = wealthService.addInvestmentInfo(investment);
+        return ResponseEntity.ok(investmentInfo);
     }
 
     @PostMapping("/invest/upload")
@@ -54,6 +56,7 @@ public class InvestmentController {
                                                        @RequestParam InvestmentType type,
                                                        @RequestParam Optional<Float> buyPrice,
                                                        @RequestParam Optional<Float> sellPrice) {
+
         Investment investment = wealthService.updateInvestmentInfo(id, type, buyPrice, sellPrice);
         return ResponseEntity
                 .accepted()

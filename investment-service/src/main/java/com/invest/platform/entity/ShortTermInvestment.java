@@ -1,4 +1,4 @@
-package com.invest.platform.models;
+package com.invest.platform.entity;
 
 import javax.persistence.Entity;
 
