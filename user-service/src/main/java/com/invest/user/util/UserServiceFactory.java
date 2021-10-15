@@ -20,6 +20,7 @@ public class UserServiceFactory {
 
     public static UserService getService(String type){
         UserService userService = null;
+        type = type.toUpperCase();
         switch(type){
             case "ANALYST" : userService = analystService;break;
             case "TRADER"  : userService = traderService; break;

@@ -2,21 +2,23 @@ package com.invest.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.invest.lib.config.NotNullAndNotEmpty;
 import com.invest.lib.model.Role;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Analyst.class, name = "analyst"),
+        @JsonSubTypes.Type(value = Trader.class, name = "trader")
+})
 @MappedSuperclass
 public abstract class Person {
-
-    @Id
-    String userId;
 
     @NotNullAndNotEmpty
     String name;
@@ -30,14 +32,6 @@ public abstract class Person {
 
     @JsonIgnore
     Role role;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getName() {
         return name;

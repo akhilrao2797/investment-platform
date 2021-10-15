@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
 
     @Query("Select s from Subscription s " +
-            "where s.customer in (select n from Customer n where n.userId = ?1)")
+            "where s.trader in (select n from Trader n where n.traderId = ?1)")
     List<Subscription> findByUserId(String userId);
 
     Optional<Subscription> findByTrader(Trader trader);
