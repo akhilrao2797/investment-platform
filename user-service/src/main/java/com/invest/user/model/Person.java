@@ -30,6 +30,9 @@ public abstract class Person {
     @JsonIgnore
     Role role;
 
+    @NotNullAndNotEmpty
+    String phoneNumber;
+
     public String getName() {
         return name;
     }
@@ -60,5 +63,13 @@ public abstract class Person {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

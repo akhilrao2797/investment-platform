@@ -1,7 +1,8 @@
 package com.invest.user.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Subscription {
@@ -14,7 +15,11 @@ public class Subscription {
     Trader trader;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<Analyst> analystList;
+    Set<Analyst> analystList;
+
+    public Subscription(){
+        this.analystList = new HashSet();
+    }
 
     public long getSubscriptionId() {
         return subscriptionId;
@@ -32,11 +37,11 @@ public class Subscription {
         this.trader = trader;
     }
 
-    public List<Analyst> getAnalystList() {
+    public Set<Analyst> getAnalystList() {
         return analystList;
     }
 
-    public void setAnalystList(List<Analyst> analystList) {
+    public void setAnalystList(Set<Analyst> analystList) {
         this.analystList = analystList;
     }
 }
